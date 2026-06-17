@@ -2,11 +2,17 @@ import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import StudentItem from "@/components/student-item";
 import { Student, STUDENTS } from "@/data/students";
 import SearchBar from "@/components/search-bar";
+import StudentDetail from "@/components/student-details";
 import { useState } from "react";
 
 export default function HomeScreen() {
-    // State 1: the current search query
     const [query, setQuery] = useState<string>("");
+
+    const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+
+    const handleSelect = (student: Student) => {
+        setSelectedStudent((prev) => (prev?.id === student.id ? null : student));
+    };
 
     const filtered = STUDENTS.filter((s) => {
         return (
@@ -20,18 +26,20 @@ export default function HomeScreen() {
             <View style={styles.titleBar}>
                 <Text style={styles.title}>Student Directory</Text>
             </View>
+
             <SearchBar value={query} onChangeText={setQuery} />
 
             <FlatList
                 data={filtered}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <StudentItem student={item} onPress={() => {}} isSelected={false} />}
+                renderItem={({ item }) => <StudentItem student={item} onPress={handleSelect} isSelected={selectedStudent?.id === item.id} />}
                 ListEmptyComponent={
                     <View style={styles.empty}>
                         <Text style={styles.emptyText}>No students match "{query}"</Text>
                     </View>
                 }
             />
+            {selectedStudent && <StudentDetail student={selectedStudent} />}
         </ScrollView>
     );
 }
