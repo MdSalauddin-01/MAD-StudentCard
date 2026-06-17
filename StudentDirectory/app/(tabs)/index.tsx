@@ -1,10 +1,12 @@
 import { StyleSheet, View } from "react-native";
 import StudentItem from "@/components/student-item";
 import { STUDENTS } from "@/data/students";
+import SearchBar from "@/components/search-bar";
 
 export default function HomeScreen() {
     return (
         <View style={styles.container}>
+            <SearchBar value="" onChangeText={() => {}} />
             {STUDENTS.map((student) => (
                 <StudentItem key={student.id} student={student} onPress={() => {}} isSelected={false} />
             ))}
