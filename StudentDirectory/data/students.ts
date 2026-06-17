@@ -11,12 +11,12 @@ export interface Student {
 export const STUDENTS: Student[] = [
   {
     id: "1",
-    name: "Rakib Rahman",
-    studentId: "22-12345-1",
+    name: "Md Salauddin",
+    studentId: "23-51479-1",
     department: "Computer Science",
     bio: "Passionate about mobile development and building tools that make everyday life easier.",
     skills: ["React Native", "TypeScript", "Node.js"],
-    avatarUrl: "https://i.pravatar.cc/150?img=1",
+    avatarUrl: require('../assets/images/Shamim.jpg'),
   },
   {
     id: "2",

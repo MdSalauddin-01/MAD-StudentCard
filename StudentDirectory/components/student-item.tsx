@@ -14,11 +14,15 @@ export default function StudentItem({ student, onPress, isSelected }: StudentIte
       onPress={() => onPress(student)}
       activeOpacity={0.7}
     >
-      <Image
-        source={{ uri: student.avatarUrl }}
-        style={styles.avatar}
-        resizeMode="cover"
-      />
+       <Image
+          source={
+            typeof student.avatarUrl === "string"
+            ? { uri: student.avatarUrl }       
+            : student.avatarUrl                 
+           }
+           style={styles.avatar}
+           resizeMode="cover"
+        />
  
       <View style={styles.info}>
         <Text style={styles.name} numberOfLines={1}>
